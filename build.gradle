@@ -1,0 +1,39 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.13'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'java'
+	id 'war'
+	id 'eclipse-wtp'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '11'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+        // Comment out this line to see the working version.
+	implementation 'org.springframework.session:spring-session-jdbc'
+
+	runtimeOnly 'com.h2database:h2'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation("org.apache.tomcat.embed:tomcat-embed-jasper")
+	implementation("javax.servlet:jstl")
+	implementation("com.stimulsoft:stimulsoft-reports-libs:2023.3.1") {
+	  exclude group: 'xml-apis', module: 'xml-apis'
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
